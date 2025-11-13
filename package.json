@@ -1,0 +1,48 @@
+{
+  "name": "redux-anecdotes-cicd",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
+    "json-server": "^0.17.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.7",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
+    "serve": "^14.2.5",
+    "uuid": "^13.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start-prod": "serve -s build -l 3000",
+    "server": "json-server --watch db.json --host 0.0.0.0 --port 3001",
+    "build": "npm install && react-scripts build",
+    "eslint": "eslint './**/*.{js,jsx}'",
+    "test:e2e": "playwright test --project=chromium"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "eslint": "^8.57.1"
+  }
+}
