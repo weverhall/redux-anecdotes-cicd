@@ -39,15 +39,25 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     steps:
-      - name: Deploy on Render with curl
+      - name: Deploy client on Render with curl
         run: curl -X POST "https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}"
-      - name: Deploy success
+      - name: Client deploy success
         if: success()
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@0.4.0
         with:
-          args: New version successfully deployed!
+          args: New client version successfully deployed!
+          
+      - name: Deploy server on Render with curl
+        run: curl -X POST "https://api.render.com/deploy/${{ secrets.SERVER_RENDER_SERVICE_ID }}?key=${{ secrets.SERVER_RENDER_API_KEY }}"
+      - name: Server deploy success
+        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.4.0
+        with:
+          args: New server version successfully deployed!
 
   tag_release:
     needs: [deploy]
